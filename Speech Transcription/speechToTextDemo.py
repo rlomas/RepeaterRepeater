@@ -31,6 +31,7 @@ def main():
 		# Converts the audio file into an readable input
 		r = sr.Recognizer()
 		dir = os.path.dirname(os.path.realpath(__file__))
+		dir = os.path.join(dir,"SampleRecordings")
 		audioFile = sr.AudioFile(os.path.join(dir,file_list[count]))
 		with audioFile as source:
 			audio = r.record(source)

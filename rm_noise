@@ -1,0 +1,18 @@
+#!/bin/bash
+# rm_noise
+
+# Sanity check command line options
+usage() {
+  echo "Usage: $0 (input_audio_file) (output_audio_file)"
+}
+
+if [ $# -ne 2 ]; then
+  usage
+  exit 1
+fi
+
+# Create background noise profile from mp3
+sox $1 -n noiseprof noise.prof
+
+# Remove noise from mp3 using profile
+sox $1 $2 noisered noise.prof .2

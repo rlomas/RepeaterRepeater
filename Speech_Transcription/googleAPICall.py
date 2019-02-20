@@ -11,19 +11,17 @@ from google.cloud.speech import types
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input_file', type=str, help='Input audio file. Must be .flac')
-parser.add_argument('--output_path', type=str, help='Output data file to write command to. Must be text file.')
 
 def main():
 
 	args = parser.parse_args()
 	input_path = args.input_file
-	output_path = args.output_path
 
-	transcribe_file(input_path,output_path)
-
+	transcribe_file(input_path)
 
 
-def transcribe_file(speech_file,output_file):
+
+def transcribe_file(speech_file):
     """Transcribe the given audio file."""
    
     client = speech.SpeechClient()

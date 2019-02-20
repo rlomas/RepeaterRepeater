@@ -10,8 +10,8 @@ from google.cloud.speech import types
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_file', type=str, help='Input data file. Must be .flac')
-parser.add_argument('--output_path', type=str, help='Output data file. Must be text file.')
+parser.add_argument('--input_file', type=str, help='Input audio file. Must be .flac')
+parser.add_argument('--output_path', type=str, help='Output data file to write command to. Must be text file.')
 
 def main():
 

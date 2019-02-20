@@ -5,13 +5,6 @@ then
 else
     echo "File to analyze: $1"
 
-    # if ! [[ $1 == *.flac ]]
-    # then
-    #     echo "Invalid file extension"
-    #     echo "Please provide relative path to .flac file you wish to analyze"
-    #     exit 1
-    # fi
-
     python3 fileConvert.py $1
     code=$?
     filename=$1

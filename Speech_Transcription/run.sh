@@ -23,6 +23,20 @@ else
     # Runs through googleAPI
     API_OUT="$(python3 googleAPICall.py --input_file "$filename")"
 
+    if [ "$API_OUT" == "authentication needed" ]
+    then 
+        echo "Authentication needed"
+
+        gcloud config set project repeaterrepeater-1550350494511
+        gcloud projects add-iam-policy-binding repeaterrepeater-1550350494511 --member "serviceAccount:amyjbaer@repeaterrepeater-1550350494511.iam.gserviceaccount.com" --role "roles/owner"
+        gcloud iam service-accounts keys create RepeaterRepeater-90d8f74733ea.json --iam-account amyjbaer@repeaterrepeater-1550350494511.iam.gserviceaccount.com
+        
+        echo "Run this command:"
+        echo 'export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"RepeaterRepeater-90d8f74733ea.json"'
+        echo "And run again"
+        exit 1
+    fi
+
     # Process google output
     PROCESSOR_OUT="$(python processor.py "$API_OUT")"
 

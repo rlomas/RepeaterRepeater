@@ -23,8 +23,11 @@ def main():
 
 def transcribe_file(speech_file):
     """Transcribe the given audio file."""
-   
-    client = speech.SpeechClient()
+    try:
+        client = speech.SpeechClient()
+    except:
+        print("authentication needed")
+        exit(1)
 
     with io.open(speech_file, 'rb') as audio_file:
         content = audio_file.read()

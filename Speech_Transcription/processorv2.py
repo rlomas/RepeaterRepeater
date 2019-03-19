@@ -10,6 +10,10 @@ filename = sys.argv[1]
 with open(filename) as file:
     data = json.load(file)
 
+if "error" in data.keys():
+    print(data)
+    exit(1)
+
 google_results = OrderedDict()
 for result in data["results"][0]["alternatives"]:
     confidence = -1
@@ -84,6 +88,10 @@ if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
         print("\tPOS Score: ", pos_scores[transcript])
         print("\tPunctuation Score: ", punctutation_scores[transcript])
         print("\tOrdering Adjustment: ", "TODO")
+# (5) No debug flag, print our choice
+else: 
+    # TODO change this to actual choice
+    print(google_results.keys()[0])
 
 ##########################################
 

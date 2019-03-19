@@ -2,3 +2,6 @@
 *.mp3
 *.flac
 RepeaterRepeater-90d8f74733ea.json
+*__pycache__*
+squid/
+

@@ -1,0 +1,17 @@
+{
+  "config": {
+      "encoding":"FLAC",
+      "languageCode": "en-US",
+      "enableWordTimeOffsets": true,
+      "maxAlternatives": 5,
+      "model":"command_and_search",
+      "enableWordConfidence":true,
+      "enableAutomaticPunctuation": true,
+      "enableSpeakerDiarization": true
+
+
+  },
+  "audio": {
+      "uri":"null"
+  }
+}

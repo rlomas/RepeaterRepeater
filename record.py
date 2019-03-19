@@ -34,6 +34,7 @@ class Record(object):
                 self.time_elapsed = time.time()
                 self.light.set_color(RED)
                 self.record()
+                break
 
     def open_stream(self):
         self.stream = self.audio.open(format=form_1,

@@ -1,4 +1,4 @@
-export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"key.json"
+export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"raspberry-pi-key.json"
 
 if [ $# -eq 0 ]
 then

@@ -2,7 +2,7 @@
 export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"raspberry-pi-key.json"
 
 # Record on Raspberry Pi
-python3 ../record.py
+python3 record.py
 
 # Convert file to flace
 python3 fileConvert.py "test1.wav"

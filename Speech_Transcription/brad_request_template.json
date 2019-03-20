@@ -1,6 +1,5 @@
 {
   "config": {
-      "encoding":"FLAC",
       "languageCode": "en-US",
       "enableWordTimeOffsets": true,
       "maxAlternatives": 5,

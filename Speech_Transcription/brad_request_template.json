@@ -2,7 +2,7 @@
   "config": {
       "languageCode": "en-US",
       "enableWordTimeOffsets": true,
-      "maxAlternatives": 5,
+      "maxAlternatives": 10,
       "model":"command_and_search",
       "enableWordConfidence":true,
       "enableAutomaticPunctuation": true,

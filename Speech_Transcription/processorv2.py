@@ -74,20 +74,22 @@ for transcript in google_results.keys():
 
 
 # (3) Cacluate final score and choose best option
-
+total_scores = []
+for rank, transcript in enumerate(google_results.keys()):
+    total_scores.append(rank)
 ##########################################
 
 
 
 # (4) If debug flag, print out why option was chosen
 if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
-    for transcript in google_results.keys():
+    for rank, transcript in enumerate(google_results.keys()):
         print(transcript)
-        print("\tTotal Score: ", "TODO")
+        print("\tTotal Score: ", total_scores[rank])
+        print("\tGoogle Ranking Order: ", rank+1)
         print("\tGoogle Confidence :", google_results[transcript])
         print("\tPOS Score: ", pos_scores[transcript])
         print("\tPunctuation Score: ", punctutation_scores[transcript])
-        print("\tOrdering Adjustment: ", "TODO")
 # (5) No debug flag, print our choice
 else: 
     # TODO change this to actual choice

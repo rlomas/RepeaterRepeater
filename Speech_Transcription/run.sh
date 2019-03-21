@@ -11,7 +11,7 @@ else
     ./googleAPICallV2.sh "$1"
 
     # Process google output
-    PROCESSOR_OUT="$(python processorv2.py "googleOutput.json")"
+    PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json")"
 
     echo "Text Found: " $PROCESSOR_OUT
 

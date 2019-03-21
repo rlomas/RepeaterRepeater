@@ -1,2 +1,4 @@
 TEXT="$1"
-say "$TEXT"
+gtts-cli "$TEXT" --output out.mp3
+mpg123 -q out.mp3
+[ -e out.mp3 ] && rm out.mp3

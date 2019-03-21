@@ -15,14 +15,10 @@ if "error" in data.keys():
     exit(1)
 
 google_results = OrderedDict()
-for result in data["results"][0]["alternatives"]:
-    confidence = -1
-    if "confidence" in result.keys():
-        confidence = result['confidence']
-    google_results[result["transcript"]] = confidence
+for rank, result in enumerate(data["results"][0]["alternatives"]):
+    google_results[result["transcript"]] = rank
 
 ##########################################
-
 
 
 # (2) Get score from POS analytics
@@ -43,7 +39,6 @@ def pos_analyze(transcript):
         if 'subj' in token.dep_:
             subject += 1
 
-    # TODO: come up with scoring system that's better
     score = 0
     if verbs > 0:
         score += 1
@@ -61,7 +56,6 @@ for transcript in google_results.keys():
 ##########################################
 
 
-
 # (3) Look at punctutation from google string
 punctutation_scores = OrderedDict()
 for transcript in google_results.keys():
@@ -70,13 +64,21 @@ for transcript in google_results.keys():
 
 ##########################################
 
-# TODO: should factor in the ordering of the google results (hence the orderedDict)
-
 
 # (3) Cacluate final score and choose best option
-total_scores = []
-for rank, transcript in enumerate(google_results.keys()):
-    total_scores.append(rank)
+final_choice = ""
+highest_POS = (-1, "")
+for transcript, rank in google_results.items():
+    if pos_scores[transcript] > highest_POS[0]:
+        highest_POS = (pos_scores[transcript], transcript)
+    if punctutation_scores[transcript]:
+        final_choice = transcript
+        break
+
+if final_choice == "":
+    final_choice = google_results.keys()[0]
+if google_results[final_choice] > google_results[highest_POS[1]] + 4:
+    final_choice = highest_POS[1]
 ##########################################
 
 
@@ -85,15 +87,12 @@ for rank, transcript in enumerate(google_results.keys()):
 if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
     for rank, transcript in enumerate(google_results.keys()):
         print(transcript)
-        print("\tTotal Score: ", total_scores[rank])
-        print("\tGoogle Ranking Order: ", rank+1)
-        print("\tGoogle Confidence :", google_results[transcript])
+        print("\tGoogle Ranking Order: ", rank)
         print("\tPOS Score: ", pos_scores[transcript])
         print("\tPunctuation Score: ", punctutation_scores[transcript])
 # (5) No debug flag, print our choice
 else: 
-    # TODO change this to actual choice
-    print(google_results.keys()[0])
+    print(final_choice)
 
 ##########################################
 

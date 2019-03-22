@@ -27,4 +27,6 @@ do
 
     # Speak the processed output
     ./textToSpeech.sh "$PROCESSOR_OUT"
-fi
+
+    kill $to_kill
+done

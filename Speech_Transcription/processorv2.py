@@ -1,4 +1,4 @@
-from spacy import load
+# from spacy import load
 import sys
 import json
 from collections import OrderedDict
@@ -22,36 +22,36 @@ for rank, result in enumerate(data["results"][0]["alternatives"]):
 
 
 # (2) Get score from POS analytics
-def pos_analyze(transcript):
-    nlp = load('en_core_web_sm')
-    doc = nlp(transcript, 'utf-8')
+# def pos_analyze(transcript):
+#     nlp = load('en_core_web_sm')
+#     doc = nlp(transcript, 'utf-8')
 
-    nouns = 0
-    verbs = 0
-    subject = 0
+#     nouns = 0
+#     verbs = 0
+#     subject = 0
 
-    # identifies parts of speech of each word
-    for token in doc:
-        if token.pos_ == u"VERB":
-            verbs += 1
-        if token.pos_ == u"NOUN":
-            nouns += 1
-        if 'subj' in token.dep_:
-            subject += 1
+#     # identifies parts of speech of each word
+#     for token in doc:
+#         if token.pos_ == u"VERB":
+#             verbs += 1
+#         if token.pos_ == u"NOUN":
+#             nouns += 1
+#         if 'subj' in token.dep_:
+#             subject += 1
 
-    score = 0
-    if verbs > 0:
-        score += 1
-    if nouns > 0:
-        score += 1
-    if subject > 0:
-        score += 1
+#     score = 0
+#     if verbs > 0:
+#         score += 1
+#     if nouns > 0:
+#         score += 1
+#     if subject > 0:
+#         score += 1
 
-    return score
+#     return score
 
-pos_scores = OrderedDict()
-for transcript in google_results.keys():
-    pos_scores[transcript] = pos_analyze(transcript)
+# pos_scores = OrderedDict()
+# for transcript in google_results.keys():
+#     pos_scores[transcript] = pos_analyze(transcript)
 
 ##########################################
 
@@ -67,18 +67,18 @@ for transcript in google_results.keys():
 
 # (3) Cacluate final score and choose best option
 final_choice = ""
-highest_POS = (-1, "")
+# highest_POS = (-1, "")
 for transcript, rank in google_results.items():
-    if pos_scores[transcript] > highest_POS[0]:
-        highest_POS = (pos_scores[transcript], transcript)
+    # if pos_scores[transcript] > highest_POS[0]:
+    #     highest_POS = (pos_scores[transcript], transcript)
     if punctutation_scores[transcript]:
         final_choice = transcript
         break
 
 if final_choice == "":
     final_choice = google_results.keys()[0]
-if google_results[final_choice] > google_results[highest_POS[1]] + 4:
-    final_choice = highest_POS[1]
+# if google_results[final_choice] > google_results[highest_POS[1]] + 4:
+#     final_choice = highest_POS[1]
 ##########################################
 
 
@@ -88,7 +88,7 @@ if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
     for rank, transcript in enumerate(google_results.keys()):
         print(transcript)
         print("\tGoogle Ranking Order: ", rank)
-        print("\tPOS Score: ", pos_scores[transcript])
+        # print("\tPOS Score: ", pos_scores[transcript])
         print("\tPunctuation Score: ", punctutation_scores[transcript])
 # (5) No debug flag, print our choice
 else: 

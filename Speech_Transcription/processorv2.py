@@ -1,4 +1,4 @@
-import spacy
+from spacy import load
 import sys
 import json
 from collections import OrderedDict
@@ -23,7 +23,7 @@ for rank, result in enumerate(data["results"][0]["alternatives"]):
 
 # (2) Get score from POS analytics
 def pos_analyze(transcript):
-    nlp = spacy.load('en_core_web_sm')
+    nlp = load('en_core_web_sm')
     doc = nlp(transcript, 'utf-8')
 
     nouns = 0

@@ -4,7 +4,7 @@ do
     export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"raspberry-pi-key.json"
 
     # Record on Raspberry Pi
-    MODE = "$(python3 record.py)"
+    MODE="$(python3 record.py)"
 
     if [[ $? -ne 0 ]] ; then
         kill 0
@@ -18,14 +18,14 @@ do
     to_kill=$!
 
     # Runs through googleAPI
-    ./googleAPICallV2.sh "test.wav"
+    ./googleAPICallV2.sh "test1.wav"
 
     # Process google output
     PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json")"
 
     echo "Text Found: " $PROCESSOR_OUT
 
-    COMMAND = "$MODE$PROCESSOR_OUT"
+    COMMAND="$MODE$PROCESSOR_OUT"
 
     # Speak the processed output
     ./textToSpeech.sh "$COMMAND"

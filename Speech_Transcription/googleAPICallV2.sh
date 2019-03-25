@@ -13,7 +13,7 @@ else
     echo $BASENAME
 
     #upload filename to google storage
-    python3 uploadFile.py --bucket_name test-repeater-repeater --src_file $1 --dst_file brad_demo/$BASENAME
+    python uploadFile.py --bucket_name test-repeater-repeater --src_file $1 --dst_file brad_demo/$BASENAME
 
     #make file public (may not need this)
     # gsutil acl ch -u AllUsers:R gs://test-repeater-repeater/brad_demo/$BASENAME
@@ -25,6 +25,6 @@ else
     curl -s -H "Content-Type: application/json"     -H "Authorization: Bearer "$(gcloud auth application-default print-access-token)     https://speech.googleapis.com/v1p1beta1/speech:recognize     -d @brad_request_final.json > googleOutput.json
 
     #delete file from google storage
-    python3 deleteFile.py --bucket_name test-repeater-repeater --blob_name brad_demo/$BASENAME
+    python deleteFile.py --bucket_name test-repeater-repeater --blob_name brad_demo/$BASENAME
 
 fi

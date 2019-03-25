@@ -106,7 +106,7 @@ def main():
     if rec.mode == 1:
         print("OK Google ") 
     elif rec.mode == 2:
-        print("Hey Alexa ")
+        print("Alexa ")
     else:
         print("Hey Siri ")
 

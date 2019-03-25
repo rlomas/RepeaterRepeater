@@ -22,20 +22,45 @@ class Record(object):
         self.frames = []
         self.stream = None
         self.light = Squid(18,23,24)
-        self.light.set_color(GREEN)
-        self.button = Button(25)
+        self.light.set_color(BLUE)
+        self.button_record = Button(25)
+        self.button_mode = Button(16)
+        self.mode = 1
         self.time_elapsed = None
+        
+    def change_color(self):
+        if self.mode == 2:
+            self.light.set_color([100,65,0])
+            #print("inside 2")
+        elif self.mode == 3:
+            self.light.set_color(PURPLE)
+            #print("inside 3")
+        elif self.mode == 4:
+            #print("inside 4")
+            self.mode = 1
+            self.light.set_color(BLUE)
+            
 
     def run_loop(self):
         while True:
-            if self.button.is_pressed():
+            if self.button_record.is_pressed():
                 # starts recording
-                print("recording begins")
+                #print("recording begins")
                 self.time_elapsed = time.time()
                 self.light.set_color(RED)
                 self.record()
                 break
-
+            elif self.button_mode.is_pressed():
+                self.mode += 1
+                #print("button pressed")
+                self.change_color()
+                time.sleep(2)
+                
+    
+    
+                    
+                    
+            
     def open_stream(self):
         self.stream = self.audio.open(format=form_1,
                                       rate=44100,
@@ -49,10 +74,10 @@ class Record(object):
         self.open_stream()
 
         while True:
-            if self.button.is_pressed():
+            if self.button_record.is_pressed():
                 self.time_elapsed = time.time() - self.time_elapsed
-                print("recording time: " + str(self.time_elapsed))
-                print("end recording")
+                #print("recording time: " + str(self.time_elapsed))
+                #print("end recording")
                 self.save()
                 self.light.set_color(GREEN)
                 break
@@ -72,11 +97,19 @@ class Record(object):
         wavefile.setframerate(samp_rate)
         wavefile.writeframes(b''.join(self.frames))
         wavefile.close()
-        print("saved file ")
+        #print("saved file ")
 
-
-if __name__ == "__main__":
+def main():
     rec = Record()
     rec.run_loop()
     rec.audio.terminate()
+    if rec.mode == 1:
+        print("OK Google ") 
+    elif rec.mode == 2:
+        print("Hey Alexa ")
+    else:
+        print("Hey Siri ")
+
+if __name__ == "__main__":
+    main()
 

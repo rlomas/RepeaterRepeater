@@ -6,7 +6,7 @@ do
 	export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"raspberry-pi-key.json"
 
 	# Record on Raspberry Pi
-	python3 record.py
+	MODE="$(python3 record.py)"
 
 	if [[ $? -ne 0 ]] ; then
 		kill 0
@@ -14,7 +14,7 @@ do
 	fi
 
 	# Start Yellow for processing
-	python3 color.py CYAN &
+	python3 color.py WHITE &
 
 	# Get PID of color.py process
 	to_kill=$!
@@ -32,8 +32,10 @@ do
 
 	echo "Text Found: " $PROCESSOR_OUT
 
+	COMMAND="$MODE$PROCESSOR_OUT"
+
 	# Speak the processed output
-	./textToSpeech.sh "$PROCESSOR_OUT"
+	./textToSpeech.sh "$COMMAND"
 
 	#End processing light
 	kill $to_kill

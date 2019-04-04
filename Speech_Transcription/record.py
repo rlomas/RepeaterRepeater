@@ -104,11 +104,11 @@ def main():
     rec.run_loop()
     rec.audio.terminate()
     if rec.mode == 1:
-        print("OK Google ") 
+        print("OK Google. ") 
     elif rec.mode == 2:
-        print("Alexa ")
+        print("Alexa. ")
     else:
-        print("Hey Siri ")
+        print("Hey Siri. ")
 
 if __name__ == "__main__":
     main()

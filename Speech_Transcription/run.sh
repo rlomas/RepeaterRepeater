@@ -7,7 +7,7 @@ do
     MODE=$(cat currentMode.txt)
 
     # Record on Raspberry Pi
-    python3 record.py $MODE
+    MODE=$(python3 record.py $MODE)
 
     if [[ $? -ne 0 ]] ; then
         kill 0
@@ -27,8 +27,6 @@ do
     PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json")"
 
     echo "Text Found: " $PROCESSOR_OUT
-
-    MODE=$(cat currentMode.txt)
 
     COMMAND="$MODE$PROCESSOR_OUT"
 

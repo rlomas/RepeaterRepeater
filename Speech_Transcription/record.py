@@ -31,11 +31,11 @@ class Record(object):
         self.button_record = Button(25)
         self.button_mode = Button(16)
         self.time_elapsed = None
-        print(cur_mode)
-        if cur_mode == "OK Google. ":
+
+        if cur_mode == 1:
             self.mode = Mode.GOOGLE
             self.light.set_color(BLUE)
-        elif cur_mode == "Alexa. ":
+        elif cur_mode == 2:
             self.mode = Mode.ALEXA
             self.light.set_color([100,65,0])
         else:
@@ -112,16 +112,20 @@ class Record(object):
 
 def main():
     cur_mode = sys.argv[1]
-    rec = Record(cur_mode)
+    rec = Record(int(cur_mode))
     rec.run_loop()
     rec.audio.terminate()
     with open('currentMode.txt', 'w') as outfile:
         if rec.mode == Mode.GOOGLE:
-            outfile.write("OK Google. ") 
+            outfile.write("1") 
+            print("OK Google. ")
         elif rec.mode == Mode.ALEXA:
-            outfile.write("Alexa. ")
+            outfile.write("2")
+            print("Alexa. ")
         else:
-            outfile.write("Hey Siri. ")
+            outfile.write("3")
+            print("Hey Siri. ")
+
 
 if __name__ == "__main__":
     main()

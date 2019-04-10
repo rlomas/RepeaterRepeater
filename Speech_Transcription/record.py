@@ -4,7 +4,7 @@ import time
 from squid import *
 from button import *
 from enum import Enum
-
+import sys
 
 # globals
 form_1 = pyaudio.paInt16 # 16-bit resolution
@@ -31,7 +31,7 @@ class Record(object):
         self.button_record = Button(25)
         self.button_mode = Button(16)
         self.time_elapsed = None
-
+        print(cur_mode)
         if cur_mode == "OK Google. ":
             self.mode = Mode.GOOGLE
             self.light.set_color(BLUE)

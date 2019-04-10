@@ -3,6 +3,7 @@ import wave
 import time
 from squid import *
 from button import *
+from enum import Enum
 
 
 # globals
@@ -14,33 +15,44 @@ record_secs = 10 # seconds to record
 dev_index = 2 # device index found by p.get_device_info_by_index(ii)
 wav_output_filename = 'test1.wav' # name of .wav file
 
+class Mode(Enum):
+    GOOGLE = 1
+    ALEXA = 2
+    SIRI = 3
+
 
 class Record(object):
     
-    def __init__(self):
+    def __init__(self, cur_mode):
         self.audio = pyaudio.PyAudio()
         self.frames = []
         self.stream = None
         self.light = Squid(18,23,24)
-        self.light.set_color(BLUE)
         self.button_record = Button(25)
         self.button_mode = Button(16)
-        self.mode = 1
         self.time_elapsed = None
+
+        if cur_mode == "OK Google. ":
+            self.mode = Mode.GOOGLE
+            self.light.set_color(BLUE)
+        elif cur_mode == "Alexa. ":
+            self.mode = Mode.ALEXA
+            self.light.set_color([100,65,0])
+        else:
+            self.mode = Mode.SIRI
+            self.light.set_color(PURPLE)
         
     def change_color(self):
-        if self.mode == 2:
+        if self.mode == Mode.GOOGLE:
             self.light.set_color([100,65,0])
-            #print("inside 2")
-        elif self.mode == 3:
+            self.mode = Mode.ALEXA
+        elif self.mode == Mode.ALEXA:
             self.light.set_color(PURPLE)
-            #print("inside 3")
-        elif self.mode == 4:
-            #print("inside 4")
-            self.mode = 1
+            self.mode = Mode.SIRI
+        elif self.mode == Mode.SIRI:
             self.light.set_color(BLUE)
+            self.mode = Mode.GOOGLE
             
-
     def run_loop(self):
         while True:
             if self.button_record.is_pressed():
@@ -51,7 +63,6 @@ class Record(object):
                 self.record()
                 break
             elif self.button_mode.is_pressed():
-                self.mode += 1
                 #print("button pressed")
                 self.change_color()
                 time.sleep(2)
@@ -100,15 +111,17 @@ class Record(object):
         #print("saved file ")
 
 def main():
-    rec = Record()
+    cur_mode = sys.argv[1]
+    rec = Record(cur_mode)
     rec.run_loop()
     rec.audio.terminate()
-    if rec.mode == 1:
-        print("OK Google. ") 
-    elif rec.mode == 2:
-        print("Alexa. ")
-    else:
-        print("Hey Siri. ")
+    with open('currentMode.txt', 'w') as outfile:
+        if rec.mode == Mode.GOOGLE:
+            outfile.write("OK Google. ") 
+        elif rec.mode == Mode.ALEXA:
+            outfile.write("Alexa. ")
+        else:
+            outfile.write("Hey Siri. ")
 
 if __name__ == "__main__":
     main()

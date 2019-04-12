@@ -22,7 +22,7 @@ else
     python3 changeJSON.py --audio_file gs://test-repeater-repeater/brad_demo/$BASENAME
 
     #run curl command and send to proccessor (need to change -d)
-    curl -s -H "Content-Type: application/json"     -H "Authorization: Bearer "$(gcloud auth application-default print-access-token)     https://speech.googleapis.com/v1p1beta1/speech:recognize     -d @brad_request_final.json > googleOutput.json
+    curl -s -H "Content-Type: application/json"     https://speech.googleapis.com/v1p1beta1/speech:recognize?key=raspberry-pi-key.json      -d @brad_request_final.json > googleOutput.json
 
     #delete file from google storage
     python deleteFile.py --bucket_name test-repeater-repeater --blob_name brad_demo/$BASENAME

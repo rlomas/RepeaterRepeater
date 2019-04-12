@@ -12,8 +12,6 @@ else
     BASENAME=${filename##*/}
     echo $BASENAME
 
-    python googleAuth.py
-
     #upload filename to google storage
     python uploadFile.py --bucket_name test-repeater-repeater --src_file $1 --dst_file brad_demo/$BASENAME
 

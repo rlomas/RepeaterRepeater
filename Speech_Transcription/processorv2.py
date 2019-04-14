@@ -64,6 +64,28 @@ for transcript in google_results.keys():
 
 ##########################################
 
+# (4) check for shortcuts
+for transcript in google_results.keys():
+    if "time" in transcript.lower():
+        print("What time is it? ")
+        exit()
+    elif "schedule" in transcript.lower():
+        print("What my schedule is like today? ")
+        exit()
+    elif "joke" in transcript.lower():
+        print("Tell me a joke.")
+        exit()
+    elif "messages" in transcript.lower():
+        print("Read my messages.")
+        exit()
+    elif "date" in transcript.lower():
+        print("What’s the date today? ")
+        exit()
+    elif "weather" in transcript.lower():
+        print("What’s the weather today?")
+        exit()
+##########################################
+
 
 # (3) Cacluate final score and choose best option
 final_choice = ""
@@ -80,7 +102,6 @@ if final_choice == "":
 # if google_results[final_choice] > google_results[highest_POS[1]] + 4:
 #     final_choice = highest_POS[1]
 ##########################################
-
 
 
 # (4) If debug flag, print out why option was chosen

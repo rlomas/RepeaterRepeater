@@ -65,7 +65,7 @@ class Record(object):
             elif self.button_mode.is_pressed():
                 #print("button pressed")
                 self.change_color()
-                time.sleep(2)
+                time.sleep(1)
                 
     
     

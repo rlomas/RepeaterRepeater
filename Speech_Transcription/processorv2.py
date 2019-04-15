@@ -6,6 +6,8 @@ from collections import OrderedDict
 
 # (1) Pull out all strings and scores from JSON file
 
+mode = sys.argv[2]
+
 filename = sys.argv[1]
 with open(filename) as file:
     data = json.load(file)
@@ -71,22 +73,22 @@ for transcript in google_results.keys():
 # (4) check for shortcuts
 for transcript in google_results.keys():
     if "time" in transcript.lower():
-        print("What time is it? ")
+        print(mode + "What time is it? ")
         exit()
     elif "schedule" in transcript.lower():
-        print("What my schedule is like today? ")
+        print(mode + "What my schedule is like today? ")
         exit()
     elif "joke" in transcript.lower():
-        print("Tell me a joke.")
+        print(mode + "Tell me a joke.")
         exit()
     elif "messages" in transcript.lower():
-        print("Read my messages.")
+        print(mode + "Read my messages.")
         exit()
     elif "date" in transcript.lower():
-        print("What’s the date today? ")
+        print(mode + "What’s the date today? ")
         exit()
     elif "weather" in transcript.lower():
-        print("What’s the weather today?")
+        print(mode + "What’s the weather today?")
         exit()
 ##########################################
 
@@ -117,7 +119,7 @@ if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
         print("\tPunctuation Score: ", punctutation_scores[transcript])
 # (5) No debug flag, print our choice
 else: 
-    print(final_choice)
+    print(mode + final_choice)
 
 ##########################################
 

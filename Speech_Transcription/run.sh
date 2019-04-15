@@ -24,7 +24,7 @@ do
     ./googleAPICallV2.sh "test1.wav"
 
     # Process google output
-    PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json" $MODE)"
+    PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json" "$MODE")"
 
     echo "Text Found: " $PROCESSOR_OUT
 

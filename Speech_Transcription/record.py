@@ -1,6 +1,7 @@
 import pyaudio
 import wave
 import time
+from datetime import datetime
 from squid import *
 from button import *
 from enum import Enum
@@ -30,7 +31,8 @@ class Record(object):
         self.light = Squid(18,23,24)
         self.button_record = Button(25)
         self.button_mode = Button(16)
-        self.time_elapsed = None
+        self.start = None
+        self.end = None
 
         if cur_mode == 1:
             self.mode = Mode.GOOGLE
@@ -66,7 +68,7 @@ class Record(object):
             if self.button_record.is_pressed():
                 # starts recording
                 #print("recording begins")
-                self.time_elapsed = time.time()
+                self.start = datetime.now()
                 self.light.set_color(RED)
                 self.record()
                 break
@@ -93,8 +95,10 @@ class Record(object):
         self.open_stream()
 
         while True:
+            if (datetime.now() - self.start).seconds >= 20:
+                break
             if self.button_record.is_pressed():
-                self.time_elapsed = time.time() - self.time_elapsed
+                # self.time_elapsed = time.time() - self.time_elapsed
                 #print("recording time: " + str(self.time_elapsed))
                 #print("end recording")
                 self.save()

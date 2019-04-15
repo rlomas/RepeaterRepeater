@@ -11,7 +11,11 @@ with open(filename) as file:
     data = json.load(file)
 
 if "error" in data.keys():
-    print(data)
+    print("There is an error, please try again")
+    exit(1)
+
+if "results" not in data.keys():
+    print("No Response from Google, please try again")
     exit(1)
 
 google_results = OrderedDict()

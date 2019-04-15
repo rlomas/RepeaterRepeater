@@ -54,9 +54,9 @@ class Record(object):
             self.mode = Mode.GOOGLE
 
         with open('currentMode.txt', 'w') as outfile:
-            if rec.mode == Mode.GOOGLE:
+            if self.mode == Mode.GOOGLE:
                 outfile.write("1")
-            elif rec.mode == Mode.ALEXA:
+            elif self.mode == Mode.ALEXA:
                 outfile.write("2")
             else:
                 outfile.write("3")

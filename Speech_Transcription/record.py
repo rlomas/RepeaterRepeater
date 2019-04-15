@@ -70,8 +70,16 @@ class Record(object):
                 #print("recording begins")
                 self.start = datetime.now()
                 self.light.set_color(RED)
-                self.record()
-                break
+                result = self.record()
+                if result == 'timeout':
+                    if self.mode == Mode.GOOGLE:
+                        self.light.set_color(BLUE)
+                    elif self.mode == Mode.ALEXA:
+                        self.light.set_color([100,65,0])
+                    else:
+                        self.light.set_color(PURPLE)
+                else:
+                    break
             elif self.button_mode.is_pressed():
                 #print("button pressed")
                 self.change_color()
@@ -96,7 +104,8 @@ class Record(object):
 
         while True:
             if (datetime.now() - self.start).seconds >= 20:
-                break
+                self.save()
+                return "timeout"
             if self.button_record.is_pressed():
                 # self.time_elapsed = time.time() - self.time_elapsed
                 #print("recording time: " + str(self.time_elapsed))

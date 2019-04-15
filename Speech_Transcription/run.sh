@@ -24,14 +24,12 @@ do
     ./googleAPICallV2.sh "test1.wav"
 
     # Process google output
-    PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json")"
+    PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json" $MODE)"
 
     echo "Text Found: " $PROCESSOR_OUT
 
-    COMMAND="$MODE$PROCESSOR_OUT"
-
     # Speak the processed output
-    ./textToSpeech.sh "$COMMAND"
+    ./textToSpeech.sh "$PROCESSOR_OUT"
 
     kill $to_kill
 done

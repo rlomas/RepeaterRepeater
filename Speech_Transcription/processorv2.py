@@ -15,7 +15,7 @@ if "error" in data.keys():
     exit(1)
 
 if "results" not in data.keys():
-    print("No Response from Google, please try again")
+    print("No Response from Google, please speak loudy and try again")
     exit(1)
 
 google_results = OrderedDict()

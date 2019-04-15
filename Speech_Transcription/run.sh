@@ -1,7 +1,7 @@
 while [ true ]
 do 
     # for google auth
-    #export GOOGLE_APPLICATION_CREDENTIALS=$PWD/"raspberry-pi-key.json"
+    export GOOGLE_APPLICATION_CREDENTIALS=/home/pi/RepeaterRepeater/Speech_Transcription/raspberry-pi-key.json
 
     # get current mode
     MODE=$(cat currentMode.txt)

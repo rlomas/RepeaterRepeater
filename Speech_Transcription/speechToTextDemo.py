@@ -25,8 +25,8 @@ def main():
 	,"Alexa, sing me a song","Alexa, flip a coin","pizza","coin","news","song","rain"]
 	file_list = ["Alexa-pizza.wav","Alexa-rain.wav","Alexa-news.wav","Alexa-9am.wav","Alexa-song.wav","Alexa-coin.wav"
 	,"pizza-singleword.wav","coin-singleword.wav","news-singleword.wav","song-singleword.wav","rain-singleword.wav"]
-	# phrase_list = ["Alexa, wake me up everyday at 9am", "Alexa, wake me up everyday at 9am"]
-	# file_list = ["Alexa-9am-m.wav", "Alexa-9am.wav"]
+	#phrase_list = ["Alexa, wake me up everyday at 9am"]
+	#file_list = ["Alexa-9am.wav"]
 	count = 0
 	while count < len(phrase_list):
 

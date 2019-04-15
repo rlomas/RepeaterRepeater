@@ -52,6 +52,14 @@ class Record(object):
         elif self.mode == Mode.SIRI:
             self.light.set_color(BLUE)
             self.mode = Mode.GOOGLE
+
+        with open('currentMode.txt', 'w') as outfile:
+            if self.mode == Mode.GOOGLE:
+                outfile.write("1")
+            elif self.mode == Mode.ALEXA:
+                outfile.write("2")
+            else:
+                outfile.write("3")
             
     def run_loop(self):
         while True:
@@ -65,7 +73,7 @@ class Record(object):
             elif self.button_mode.is_pressed():
                 #print("button pressed")
                 self.change_color()
-                time.sleep(2)
+                time.sleep(1)
                 
     
     

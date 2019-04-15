@@ -3,7 +3,7 @@ from google.cloud.speech_v1 import enums
 
 #client = speech_v1.SpeechClient(credentials="/Users/ajeetseenivasan/Downloads/repeaterrepeater-1550350494511-89146ac39d95.json")
 #client = speech_v1.SpeechClient()
-client = speech_v1.SpeechClient().from_service_account_file("raspberry-pi-key.json") 
+client = speech_v1.SpeechClient().from_service_account_json(filename="/Users/ajeetseenivasan/Downloads/repeaterrepeater-1550350494511-89146ac39d95.json") 
 
 
 encoding = enums.RecognitionConfig.AudioEncoding.FLAC

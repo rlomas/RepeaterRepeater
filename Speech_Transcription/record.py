@@ -52,6 +52,14 @@ class Record(object):
         elif self.mode == Mode.SIRI:
             self.light.set_color(BLUE)
             self.mode = Mode.GOOGLE
+
+        with open('currentMode.txt', 'w') as outfile:
+        if rec.mode == Mode.GOOGLE:
+            outfile.write("1")
+        elif rec.mode == Mode.ALEXA:
+            outfile.write("2")
+        else:
+            outfile.write("3")
             
     def run_loop(self):
         while True:

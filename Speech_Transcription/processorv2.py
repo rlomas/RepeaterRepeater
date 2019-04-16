@@ -72,22 +72,22 @@ for transcript in google_results.keys():
 
 # (4) check for shortcuts
 for transcript in google_results.keys():
-    if "time" in transcript.lower():
+    if "time" == transcript.lower():
         print(mode + "What time is it? ")
         exit()
-    elif "schedule" in transcript.lower():
+    elif "schedule" == transcript.lower():
         print(mode + "What my schedule is like today? ")
         exit()
-    elif "joke" in transcript.lower():
+    elif "joke" == transcript.lower():
         print(mode + "Tell me a joke.")
         exit()
-    elif "messages" in transcript.lower():
+    elif "messages" == transcript.lower():
         print(mode + "Read my messages.")
         exit()
-    elif "date" in transcript.lower():
+    elif "date" == transcript.lower():
         print(mode + "What’s the date today? ")
         exit()
-    elif "weather" in transcript.lower():
+    elif "weather" == transcript.lower():
         print(mode + "What’s the weather today?")
         exit()
 ##########################################

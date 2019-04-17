@@ -116,6 +116,7 @@ class Record(object):
 
             data = self.stream.read(chunk, exception_on_overflow=False)
             self.frames.append(data)
+        return "-"
 
     def save(self):
         # stop the stream, close it, and terminate the pyaudio instantiation

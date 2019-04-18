@@ -72,12 +72,14 @@ class Record(object):
                 self.light.set_color(RED)
                 result = self.record()
                 if result == 'timeout':
-                    if self.mode == Mode.GOOGLE:
-                        self.light.set_color(BLUE)
-                    elif self.mode == Mode.ALEXA:
-                        self.light.set_color([100,65,0])
-                    else:
-                        self.light.set_color(PURPLE)
+                    # if self.mode == Mode.GOOGLE:
+                    #     self.light.set_color(BLUE)
+                    # elif self.mode == Mode.ALEXA:
+                    #     self.light.set_color([100,65,0])
+                    # else:
+                    #     self.light.set_color(PURPLE)
+                    print('timeout')
+                    exit()
                 else:
                     break
             elif self.button_mode.is_pressed():

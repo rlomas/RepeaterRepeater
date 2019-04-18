@@ -9,6 +9,12 @@ do
     # Record on Raspberry Pi
     MODE=$(python3 record.py $MODE)
 
+    # Start Yellow for processing
+    python3 color.py WHITE &
+
+    # Get PID of color.py process
+    to_kill=$!
+
     if [ "$MODE" == "timeout" ] ; then
         ./textToSpeech.sh "Recording timed out. Please push the record button to end recording."
     else
@@ -16,12 +22,6 @@ do
             kill 0
             exit 1
         fi
-
-        # Start Yellow for processing
-        python3 color.py WHITE &
-
-        # Get PID of color.py process
-        to_kill=$!
 
         # Runs through googleAPI
         ./googleAPICallV2.sh "test1.wav"
@@ -33,7 +33,7 @@ do
 
         # Speak the processed output
         ./textToSpeech.sh "$PROCESSOR_OUT"
-
-        kill $to_kill
     fi
+
+    kill $to_kill
 done

@@ -131,7 +131,7 @@ def main():
     if timeout_or_not == 'timeout':
         print('timeout')
         return
-    else
+    else:
         with open('currentMode.txt', 'w') as outfile:
             if rec.mode == Mode.GOOGLE:
                 outfile.write("1") 

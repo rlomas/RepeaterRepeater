@@ -70,19 +70,7 @@ class Record(object):
                 #print("recording begins")
                 self.start = datetime.now()
                 self.light.set_color(RED)
-                result = self.record()
-                if result == 'timeout':
-                    # if self.mode == Mode.GOOGLE:
-                    #     self.light.set_color(BLUE)
-                    # elif self.mode == Mode.ALEXA:
-                    #     self.light.set_color([100,65,0])
-                    # else:
-                    #     self.light.set_color(PURPLE)
-                    print('timeout')
-                    rec.audio.terminate()
-                    exit()
-                else:
-                    break
+                return self.record()
             elif self.button_mode.is_pressed():
                 #print("button pressed")
                 self.change_color()
@@ -138,18 +126,22 @@ class Record(object):
 def main():
     cur_mode = sys.argv[1]
     rec = Record(int(cur_mode))
-    rec.run_loop()
+    timeout_or_not = rec.run_loop()
     rec.audio.terminate()
-    with open('currentMode.txt', 'w') as outfile:
-        if rec.mode == Mode.GOOGLE:
-            outfile.write("1") 
-            print("OK Google. ")
-        elif rec.mode == Mode.ALEXA:
-            outfile.write("2")
-            print("Alexa. ")
-        else:
-            outfile.write("3")
-            print("Hey Siri. ")
+    if timeout_or_not == 'timeout':
+        print('timeout')
+        return
+    else
+        with open('currentMode.txt', 'w') as outfile:
+            if rec.mode == Mode.GOOGLE:
+                outfile.write("1") 
+                print("OK Google. ")
+            elif rec.mode == Mode.ALEXA:
+                outfile.write("2")
+                print("Alexa. ")
+            else:
+                outfile.write("3")
+                print("Hey Siri. ")
 
 
 if __name__ == "__main__":

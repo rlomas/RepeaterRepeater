@@ -6,6 +6,7 @@ from squid import *
 from button import *
 from enum import Enum
 import sys
+import subprocess
 
 # globals
 form_1 = pyaudio.paInt16 # 16-bit resolution
@@ -48,6 +49,9 @@ class Record(object):
         if self.mode == Mode.GOOGLE:
             self.light.set_color([100,65,0])
             self.mode = Mode.ALEXA
+            bashCommand = "echo 'Alexa' | festival --tts"
+            process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+            output, error = process.communicate()
         elif self.mode == Mode.ALEXA:
             self.light.set_color(PURPLE)
             self.mode = Mode.SIRI

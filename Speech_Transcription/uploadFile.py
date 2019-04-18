@@ -17,7 +17,7 @@ def main():
         src_file = args.src_file
         dst_file = args.dst_file
         upload_blob(bucket_name,src_file,dst_file)
-    except google.auth.exceptions.TransportError as e:
+    except:
         print("Please connect to wifi")
 	
 

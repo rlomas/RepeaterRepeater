@@ -79,6 +79,7 @@ class Record(object):
                     # else:
                     #     self.light.set_color(PURPLE)
                     print('timeout')
+                    rec.audio.terminate()
                     exit()
                 else:
                     break

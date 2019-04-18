@@ -15,14 +15,14 @@ do
     # Get PID of color.py process
     to_kill=$!
 
+    if [[ $? -ne 0 ]] ; then
+            kill 0
+            exit 1
+    fi
+
     if [ "$MODE" == "timeout" ] ; then
         ./textToSpeech.sh "Recording timed out. Please push the record button to end your recording."
     else
-        if [[ $? -ne 0 ]] ; then
-            kill 0
-            exit 1
-        fi
-
         # Runs through googleAPI
         ./googleAPICallV2.sh "test1.wav"
 

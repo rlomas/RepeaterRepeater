@@ -16,7 +16,7 @@ do
     to_kill=$!
 
     if [ "$MODE" == "timeout" ] ; then
-        ./textToSpeech.sh "Recording timed out. Please push the record button to end recording."
+        ./textToSpeech.sh "Recording timed out. Please push the record button to end your recording."
     else
         if [[ $? -ne 0 ]] ; then
             kill 0

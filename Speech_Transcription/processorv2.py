@@ -3,6 +3,10 @@ import sys
 import json
 from collections import OrderedDict
 
+def savecommand(command):
+    with open('lastcommand.txt', 'w') as outfile:
+        outfile.write(command) 
+
 
 # (1) Pull out all strings and scores from JSON file
 
@@ -70,26 +74,37 @@ for transcript in google_results.keys():
 
 ##########################################
 
-# (4) check for shortcuts & "hey google" or "ok google"
+# (4) check for shortcuts & last command
 for transcript in google_results.keys():
     if "time" in transcript.lower():
         print(mode + "What time is it? ")
+        savecommand(mode + "What time is it? ")
         exit()
     elif "schedule" in transcript.lower():
         print(mode + "What my schedule is like today? ")
+        savecommand(mode + "What my schedule is like today? ")
         exit()
     elif "joke" in transcript.lower():
         print(mode + "Tell me a joke.")
+        savecommand(mode + "Tell me a joke.")
         exit()
     elif "messages" in transcript.lower():
         print(mode + "Read my messages.")
+        savecommand(mode + "Read my messages.")
         exit()
     elif "date" in transcript.lower():
         print(mode + "What’s the date today? ")
+        savecommand(mode + "What’s the date today? ")
         exit()
     elif "weather" in transcript.lower():
         print(mode + "What’s the weather today?")
-        exit()        
+        savecommand(mode + "What’s the weather today?")
+        exit() 
+    elif "replay" in transcript.lower():
+        f = open("lastcommand.txt", 'r')
+        last_command = f.read()
+        print(last_command)
+        exit()
 ##########################################
 
 
@@ -126,6 +141,8 @@ else:
         final_choice = final_choice.lower()
         final_choice = final_choice.replace('ok google', '').strip()
     print(mode + final_choice)
+    savecommand(mode + final_choice)
+
 
 ##########################################
 

@@ -3,6 +3,12 @@ do
     # for google auth
     export GOOGLE_APPLICATION_CREDENTIALS=/home/pi/demo/RepeaterRepeater/Speech_Transcription/raspberry-pi-key.json
 
+    WIFI=$(iwconfig | grep -o "ESSID.*")
+
+    if [ "$WIFI" == "ESSID.*:off/any" ] ; then
+        ./textToSpeech "Please turn on your hotspot before use."
+    fi
+
     # get current mode
     MODE=$(cat currentMode.txt)
 
@@ -11,6 +17,11 @@ do
 
     # Start Yellow for processing
     python3 color.py WHITE &
+
+    if [ "$WIFI" == "ESSID.*:off/any" ] ; then
+        ./textToSpeech "Please turn on your hotspot and try again."
+        continue
+    fi
 
     # Get PID of color.py process
     to_kill=$!

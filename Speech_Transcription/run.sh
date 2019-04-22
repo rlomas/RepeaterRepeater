@@ -18,6 +18,7 @@ do
     # Start Yellow for processing
     python3 color.py WHITE &
 
+    WIFI=$(iwconfig | grep -o "ESSID.*")
     if [ "$WIFI" == "ESSID.*:off/any" ] ; then
         ./textToSpeech "Please turn on your hotspot and try again."
         continue

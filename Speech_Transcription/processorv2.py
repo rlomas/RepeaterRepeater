@@ -70,7 +70,7 @@ for transcript in google_results.keys():
 
 ##########################################
 
-# (4) check for shortcuts
+# (4) check for shortcuts & "hey google" or "ok google"
 for transcript in google_results.keys():
     if "time" in transcript.lower():
         print(mode + "What time is it? ")
@@ -89,7 +89,7 @@ for transcript in google_results.keys():
         exit()
     elif "weather" in transcript.lower():
         print(mode + "What’s the weather today?")
-        exit()
+        exit()        
 ##########################################
 
 
@@ -119,6 +119,12 @@ if len(sys.argv) > 2 and (sys.argv[2] == '-d' or sys.argv[2] == '--debug'):
         print("\tPunctuation Score: ", punctutation_scores[transcript])
 # (5) No debug flag, print our choice
 else: 
+    if "hey google" in final_choice.lower():
+        final_choice = final_choice.lower()
+        final_choice = final_choice.replace('hey google', '').strip()
+    elif "ok google" in final_choice.lower():
+        final_choice = final_choice.lower()
+        final_choice = final_choice.replace('ok google', '').strip()
     print(mode + final_choice)
 
 ##########################################

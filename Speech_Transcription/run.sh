@@ -6,7 +6,7 @@ do
     WIFI=$(iwconfig | grep -o "ESSID.*")
 
     if [ "$WIFI" == "ESSID:off/any" ] ; then
-        ./textToSpeech "Please turn on your hotspot before use."
+        ./textToSpeech.sh "Please turn on your hotspot before use."
     fi
 
     # get current mode
@@ -20,7 +20,7 @@ do
 
     WIFI=$(iwconfig | grep -o "ESSID.*")
     if [ "$WIFI" == "ESSID:off/any" ] ; then
-        ./textToSpeech "Please turn on your hotspot and try again."
+        ./textToSpeech.sh "Please turn on your hotspot and try again."
         continue
     fi
 

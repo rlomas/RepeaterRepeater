@@ -24,19 +24,15 @@ do
         ./textToSpeech.sh "Recording timed out. Please push the record button to end your recording."
     else
         # Runs through googleAPI
-        WIFI=$(./googleAPICallV2.sh "test1.wav")
+        ./googleAPICallV2.sh "test1.wav"
 
-        if [ "$WIFI" == "Please connect to wifi" ] ; then
-            ./textToSpeech.sh "Please connect to wifi." 
-        else
-            # Process google output
-            PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json" "$MODE")"
+        # Process google output
+        PROCESSOR_OUT="$(python3 processorv2.py "googleOutput.json" "$MODE")"
 
-            echo "Text Found: " $PROCESSOR_OUT
+        echo "Text Found: " $PROCESSOR_OUT
 
-            # Speak the processed output
-            ./textToSpeech.sh "$PROCESSOR_OUT"
-        fi
+        # Speak the processed output
+        ./textToSpeech.sh "$PROCESSOR_OUT"
     fi
 
     kill $to_kill

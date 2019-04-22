@@ -49,15 +49,15 @@ class Record(object):
         if self.mode == Mode.GOOGLE:
             self.light.set_color([100,65,0])
             self.mode = Mode.ALEXA
-            # bashCommand = "echo 'Alexa' | festival --tts"
-            # process = subprocess.check_call(bashCommand.split())
             os.system("say 'Alexa'")
         elif self.mode == Mode.ALEXA:
             self.light.set_color(PURPLE)
             self.mode = Mode.SIRI
+            os.system("say 'Siri'")
         elif self.mode == Mode.SIRI:
             self.light.set_color(BLUE)
             self.mode = Mode.GOOGLE
+            os.system("say 'Google'")
 
         with open('currentMode.txt', 'w') as outfile:
             if self.mode == Mode.GOOGLE:

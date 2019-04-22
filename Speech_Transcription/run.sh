@@ -5,7 +5,7 @@ do
 
     WIFI=$(iwconfig | grep -o "ESSID.*")
 
-    if [ "$WIFI" == "ESSID.*:off/any" ] ; then
+    if [ "$WIFI" == "ESSID:off/any" ] ; then
         ./textToSpeech "Please turn on your hotspot before use."
     fi
 
@@ -19,7 +19,7 @@ do
     python3 color.py WHITE &
 
     WIFI=$(iwconfig | grep -o "ESSID.*")
-    if [ "$WIFI" == "ESSID.*:off/any" ] ; then
+    if [ "$WIFI" == "ESSID:off/any" ] ; then
         ./textToSpeech "Please turn on your hotspot and try again."
         continue
     fi

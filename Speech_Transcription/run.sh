@@ -1,13 +1,13 @@
+WIFI=$(iwconfig | grep -o "ESSID.*")
+
+if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
+    say "Please turn on your hotspot before use."
+fi
+
 while [ true ]
 do 
     # for google auth
     export GOOGLE_APPLICATION_CREDENTIALS=/home/pi/demo/RepeaterRepeater/Speech_Transcription/raspberry-pi-key.json
-
-    WIFI=$(iwconfig | grep -o "ESSID.*")
-    echo $WIFI
-    if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
-        say "Please turn on your hotspot before use."
-    fi
 
     # get current mode
     MODE=$(cat currentMode.txt)
@@ -18,18 +18,19 @@ do
     # Start Yellow for processing
     python3 color.py WHITE &
 
-    WIFI=$(iwconfig | grep -o "ESSID.*")
-    if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
-        say "Please turn on your hotspot and try again."
-        continue
-    fi
-
     # Get PID of color.py process
     to_kill=$!
 
     if [[ $? -ne 0 ]] ; then
             kill 0
             exit 1
+    fi
+
+    WIFI=$(iwconfig | grep -o "ESSID.*")
+    if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
+        say "Please turn on your hotspot and try again."
+        kill $to_kill
+        continue
     fi
 
     if [ "$MODE" == "timeout" ] ; then

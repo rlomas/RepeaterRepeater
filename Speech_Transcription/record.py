@@ -96,11 +96,12 @@ class Record(object):
 
         self.open_stream()
 
+        start_time = time.time()
         while True:
             if (datetime.now() - self.start).seconds >= 20:
                 self.save()
                 return "timeout"
-            if self.button_record.is_pressed():
+            if self.button_record.is_pressed() and (time.time() - start_time > 2):
                 # self.time_elapsed = time.time() - self.time_elapsed
                 #print("recording time: " + str(self.time_elapsed))
                 #print("end recording")

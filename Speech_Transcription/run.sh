@@ -4,8 +4,8 @@ do
     export GOOGLE_APPLICATION_CREDENTIALS=/home/pi/demo/RepeaterRepeater/Speech_Transcription/raspberry-pi-key.json
 
     WIFI=$(iwconfig | grep -o "ESSID.*")
-
-    if [ "$WIFI" == *"ESSID:off/any"* ] ; then
+    echo $WIFI
+    if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
         say "Please turn on your hotspot before use."
     fi
 
@@ -19,7 +19,7 @@ do
     python3 color.py WHITE &
 
     WIFI=$(iwconfig | grep -o "ESSID.*")
-    if [ "$WIFI" == *"ESSID:off/any"* ] ; then
+    if [[ "$WIFI" == *"ESSID:off/any"* ]] ; then
         say "Please turn on your hotspot and try again."
         continue
     fi

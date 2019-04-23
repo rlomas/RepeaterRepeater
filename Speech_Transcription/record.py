@@ -89,7 +89,7 @@ class Record(object):
         self.stream = self.audio.open(format=form_1,
                                       rate=44100,
                                       channels=chans,
-                                      input_device_index=2,
+                                      input_device_index=dev_index,
                                       input=True,
                                       frames_per_buffer=chunk)
 
